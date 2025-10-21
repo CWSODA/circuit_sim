@@ -2,7 +2,7 @@ CXX = clang++
 CXX_FLAGS = -std=c++20 -I ../include/
 
 TARGET = cir_sim
-OBJS = main.o vector.o matrix.o circuit.o plotter.o fourier.o logic_array.o gates.o
+OBJS = main.o vector.o matrix.o circuit.o plotter.o fourier.o logic_array.o gates.o sub_app.o
 
 $(TARGET): $(OBJS)
 	$(CXX) $(CXX_FLAGS) -o $(TARGET) $(OBJS)
