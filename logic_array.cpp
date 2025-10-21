@@ -129,6 +129,18 @@ LogicArray::LogicArray(const char* filename) {
     // add hashmap for indexing repeats?
 }
 
+void LogicArray::print_output() const {
+    std::cout << "Printing outputs: \n";
+    for (auto output : array_output) {
+        std::cout << "Result: ";
+        if (output)
+            std::cout << "true";
+        else
+            std::cout << "false";
+        std::cout << std::endl;
+    }
+}
+
 LogicInput::LogicInput(std::vector<bool> input) {
     for (auto value : input) {
         if (value) {

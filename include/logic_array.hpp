@@ -27,6 +27,7 @@ class LogicArray {
 
     void get_input();
     void load_input(LogicInput input);
+    void print_output() const;
     std::vector<bool> get_output() const;
 
     LogicArray(const char* filename);

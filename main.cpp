@@ -7,38 +7,50 @@
 #include "logic_array.hpp"
 
 int main(int argc, char* argv[]) {
-    // Vector vec = load_vec_from_file("../data/vec1");
-    // print_vec(vec);
-
-    // Matrix mat = load_matrix_from_file("../data/mat1");
-    // print_matrix(mat);
-
-    // load circuit, then analyse
-    // Circuit circuit("../data/ex2.cir");
-    // circuit.analyse();
-
     // plot_graph(0.05, 50);
     // FourierSeries fs = gen_square_wave_fs(2, 5);
     // plot_fourier(0.05, 100, fs);
 
     while (true) {
-        std::cout << "WELCOME TO CIRCUIT SIMULATOR\n\
-        Select a mode (h for help)\n";
+        std::cout << "\n\nWELCOME TO CIRCUIT SIMULATOR\n\
+Select a mode (h for help)"
+                  << std::endl;
 
         std::string input;
         std::getline(std::cin, input);
-    }
-    LogicArray la("../data/la1");
-    la.get_input();
 
-    std::cout << "Printing outputs: \n";
-    for (auto output : la.get_output()) {
-        std::cout << "Result: ";
-        if (output)
-            std::cout << "true";
-        else
-            std::cout << "false";
-        std::cout << std::endl;
+        if (input.size() == 1) {
+            char c = input.at(0);
+
+            switch (c) {
+                case 'h':  // help menu
+                    std::cout << "\
+--- HELP MENU --- \n\
+(h) help menu\n\
+(l) logic array\n\
+(c) circuit simulator\n\
+(p) graph plotter\
+                    " << std::endl;
+                    break;
+                case 'l':  // logic array
+                {
+                    std::cout << "Input filename: ";
+                    std::getline(std::cin, input);
+                    LogicArray logic_array(input.data());
+                    logic_array.get_input();
+                    logic_array.print_output();
+                } break;
+                case 'c':  // circuit simulator
+                {
+                    std::cout << "Input filename: ";
+                    std::getline(std::cin, input);
+                    Circuit circuit(input.data());
+                    circuit.analyse();
+                } break;
+                case 'p':  // plot graph
+                    break;
+            }
+        }
     }
 
     return 0;
