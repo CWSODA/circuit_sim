@@ -61,7 +61,7 @@ void plot_fourier(float x_increment, unsigned int x_length, FourierSeries fs) {
         }
 
         // calculates sine terms
-        for (size_t k = 0; k < fs.b_ks.size(); k++) {
+        for (size_t k = 1; k < fs.b_ks.size(); k++) {
             y += fs.b_ks[k] * sinf(k * fs.w0 * x);
         }
 

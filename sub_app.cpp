@@ -46,6 +46,14 @@ void run_circuit_simulator() {
 
 void run_plotter() {
     // plot_graph(0.05, 50);
-    FourierSeries fs = gen_square_wave_fs(2, 100);
+    std::string input;
+    std::cout << "Enter number of coefficients to square wave: ";
+    std::cin >> input;
+    int num = std::stoi(input);
+    if (num < 0) {
+        std::cout << "Number must be greater than 0!\n";
+        return;
+    }
+    FourierSeries fs = gen_square_wave_fs(2, num);
     plot_fourier(0.05, 100, fs);
 }
