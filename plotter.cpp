@@ -2,11 +2,14 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <iostream>
 
 #define WIDTH 100
 #define PI 3.1415926535897932384f
 
-void Point::plot(bool is_lined, float min, float max) {
+void Point::plot(bool is_lined) {
+    float min = PlotterConfig::get_instance().min;
+    float max = PlotterConfig::get_instance().max;
     printf("x: %10.3f| ", x);
     printf("y: %10.3f |", y);
 
@@ -22,7 +25,9 @@ void Point::plot(bool is_lined, float min, float max) {
     printf("%*c\n", offset, '*');
 }
 
-void plot_graph(float x_increment, unsigned int x_length) {
+void plot_graph() {
+    float x_increment = PlotterConfig::get_instance().tick;
+    unsigned int x_length = PlotterConfig::get_instance().count;
     unsigned int x_count = 0;
 
     float y;
@@ -41,15 +46,23 @@ void plot_graph(float x_increment, unsigned int x_length) {
             is_lined = true;
         }
 
-        Point(x, y).plot(is_lined, -1.0f, 1.0f);
+        Point(x, y).plot(is_lined);
 
         x_count++;
     }
 }
 
-void plot_fourier(float x_increment, unsigned int x_length, FourierSeries fs) {
+void plot_fourier(FourierSeries fs) {
     // formula = sum of a_k * cos(kwt) + b_k * sin(kwt)
+    float x_increment = PlotterConfig::get_instance().tick;
+    unsigned int x_length = PlotterConfig::get_instance().count;
     unsigned int x_count = 0;
+
+    std::cout << "plotting fs\n";
+    for (auto v : fs.b_ks) {
+        std::cout << v << ", ";
+    }
+    std::cout << std::endl;
 
     while (x_count < x_length) {
         float x = x_count * x_increment;
@@ -66,7 +79,7 @@ void plot_fourier(float x_increment, unsigned int x_length, FourierSeries fs) {
         }
 
         // leaves some leeway in min/max for gibbs phenomenon
-        Point(x, y).plot(false, -1.3f, 1.3f);
+        Point(x, y).plot(false);
 
         x_count++;
     }

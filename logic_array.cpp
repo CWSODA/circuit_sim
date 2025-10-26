@@ -28,6 +28,8 @@ void LogicArray::get_input() {
             }
         }
     }
+    // clears cin
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     this->load_input(LogicInput(inputs));
 }

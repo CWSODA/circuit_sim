@@ -14,9 +14,28 @@ class Point {
     }
 
     // plots a point
-    void plot(bool is_lined = false, float min = -1.0f, float max = 1.0f);
+    void plot(bool is_lined = false);
 };
 
-void plot_graph(float x_increment, unsigned int x_length);
+class PlotterConfig {
+   public:
+    static PlotterConfig& get_instance() {
+        static PlotterConfig instance;
+        return instance;
+    }
 
-void plot_fourier(float x_increment, unsigned int x_length, FourierSeries fs);
+    float tick = 0.05;
+    unsigned int count = 100;
+    float min = -1.0f;
+    float max = 1.0f;
+
+   private:
+    PlotterConfig() {}
+
+    PlotterConfig(PlotterConfig& other) = delete;
+    void operator=(const PlotterConfig&) = delete;
+};
+
+void plot_graph();
+
+void plot_fourier(FourierSeries fs);
