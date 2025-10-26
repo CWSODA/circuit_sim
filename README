@@ -1,0 +1,8 @@
+Program includes several circuit simulation related sub-modules
+
+-   Plotter for fourier series
+-   Logic gate array (SOP) solver
+-   Simple circuit solver
+
+Makefile is in the build file.
+Change the CXX option to the proper compiler for your system (by default it is clang++, change to g++ if needed)
